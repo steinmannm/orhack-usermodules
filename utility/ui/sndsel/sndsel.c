@@ -17,6 +17,7 @@ static const char *slot_names[] = {
 
 typedef struct _sndsel {
     t_object x_obj;
+    int own_slot;               /* which slot index we're in (1-14), 0 if unknown */
     int sound_tgt[NUM_SOUNDS];
     int sound_led[NUM_SOUNDS];
     int current_sound;
@@ -79,7 +80,7 @@ static void sndsel_list(t_sndsel *x, t_symbol *s, int argc, t_atom *argv)
     if (velocity > 0) {
         /* note-on */
         int target = x->sound_tgt[x->current_sound];
-        if (target < 1 || target > NUM_SLOTS) return;
+        if (target < 1 || target > NUM_SLOTS || target == x->own_slot) return;
 
         /* if this note is already held somewhere, send note-off first */
         if (x->note_slots[pitch]) {
@@ -145,10 +146,20 @@ static void sndsel_s2_led(t_sndsel *x, t_floatarg f) { x->sound_led[1] = (int)f;
 static void sndsel_s3_led(t_sndsel *x, t_floatarg f) { x->sound_led[2] = (int)f; sndsel_update_aux(x); }
 static void sndsel_s4_led(t_sndsel *x, t_floatarg f) { x->sound_led[3] = (int)f; sndsel_update_aux(x); }
 
+
 /* constructor */
 static void *sndsel_new(t_symbol *id)
 {
     t_sndsel *x = (t_sndsel *)pd_new(sndsel_class);
+
+    /* detect own slot index */
+    x->own_slot = 0;
+    for (int i = 1; i <= NUM_SLOTS; i++) {
+        if (strcmp(id->s_name, slot_names[i]) == 0) {
+            x->own_slot = i;
+            break;
+        }
+    }
 
     /* defaults */
     x->sound_tgt[0] = 2;
