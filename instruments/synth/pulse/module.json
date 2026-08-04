@@ -1,0 +1,17 @@
+{
+    "name" : "pulse",
+    "display" : "Pulse",
+    "parameters" :  [ 
+        ["int","bpm","BPM",60,200,114],
+        ["pitch","r_trans","Transpose",-24,24,-12],
+ 		["pct","p_duty","Pulse Duty",0.1,0.9,0.5],
+		["time","p_rel","Pulse Rel",0,5000,250],
+        ["time","e_rel","Env Rel",0,5000,2000],
+        ["time","f_retrig_pause","RtrgPause",0,1000,500]
+    ],
+    "pages" : [ 
+        ["pg_main","Main",["bpm","p_duty","p_rel","e_rel"]],
+        ["pg_param","Params",["r_trans","f_retrig_pause"]]
+    ]
+}
+

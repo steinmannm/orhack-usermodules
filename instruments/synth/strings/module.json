@@ -1,0 +1,22 @@
+{
+    "name" : "strings",
+    "display" : "Strings",
+    "parameters" :  [ 
+        ["pitch","r_trans","Transpose",-24,24,0],
+        ["pct","r_suboctave","Suboctave",0,100,0],
+        ["time","e_attack","E.Attack",10,5000,0.1],
+        ["time","e_decay","E.Decay",10,5000,0.1],
+        ["pct","e_sustain","E.Sustain",0,100,100],
+        ["time","e_release","E.Release",10,5000,0.1],
+        ["freq","f_cutoff","Cutoff",0,20000,20000],
+        ["float","f_res","Reso",0.1,5,0.1],
+        ["freq","l_freq","LFO Freq",0.05,10,0.1],
+        ["pct","f_lfo_amt","F LFO Amt.",0,100,1]
+    ],
+    "pages" : [ 
+        ["pg_vco_env","VCO Env.",["e_attack","e_decay","e_sustain","e_release"]],
+        ["pg_fltr","Filter",["f_cutoff","f_res","l_freq","f_lfo_amt"]],
+        ["pg_main","Main",["r_trans","r_suboctave"]]
+    ]
+}
+

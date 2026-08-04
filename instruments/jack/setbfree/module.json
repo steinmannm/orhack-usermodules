@@ -1,0 +1,35 @@
+{
+    "name" : "setbfree",
+    "display" : "SetBFree",
+    "parameters" :  [ 
+        ["pitch","trans","Transpose",-24,24,0],
+        ["int","drawbar16","Draw 16",0,8,4],
+        ["int","drawbar513","Draw 5 1/3",0,8,4], 
+        ["int","drawbar8","Draw 8",0,8,4],
+        ["int","drawbar4","Draw 4",0,8,4], 
+        ["int","drawbar223","Draw 2 2/3",0,8,4], 
+        ["int","drawbar2","Draw 2",0,8,4], 
+        ["int","drawbar135","Draw 1 3/5",0,8,4], 
+        ["int","drawbar113","Draw 1 1/3",0,8,4], 
+        ["int","drawbar1","Draw 1",0,8,4], 
+        ["int","perc_enable","PrcEnable",0,1,1], 
+        ["int","perc_decay","PrcDecay",1,2,1],  
+        ["int","perc_harmonic","PrcHarmn",1,2,1], 
+        ["pct","perc_vol","PrcVol",0,100,100],
+        ["int","vibr_knob","VibrKnob",1,6,1],
+        ["int","vibr_enable","VibrEnable",0,1,0], 
+        ["int","rotary","Rotary",0,2,0],
+        ["int","drv_enable","DrvEnable",0,1,0],
+        ["int","drv_char","DrvChar",0,127,0],
+        ["pct","rvb_mix","RvrbMix",0,100,20]    
+    ],
+    "pages" : [ 
+        ["pg_main","Main",["trans","rotary","rvb_mix"]],
+        ["pg_draw1","Drawbars 1",["drawbar16","drawbar513","drawbar8","drawbar4"]],
+        ["pg_draw2","Drawbars 2",["drawbar223","drawbar2","drawbar135","drawbar113"]],
+        ["pg_draw3","Drawbars 3",["drawbar1"]],
+        ["pg_perc","Percussion",["perc_enable","perc_decay","perc_harmonic"]],
+        ["pg_vibdrv","Vibr/Drive",["vibr_enable","vibr_knob","drv_enable","drv_char"]]
+    ]
+}
+

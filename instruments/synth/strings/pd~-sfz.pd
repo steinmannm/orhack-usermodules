@@ -1,0 +1,11 @@
+#N canvas 0 0 450 300 12;
+#X obj 27 133 else/sfz~ /sdcard/media/sfz/Polymoog_Strings_I.sfz;
+#X obj 261 10 loadbang;
+#X msg 261 49 \; pd dsp 1;
+#X obj 27 100 r msg;
+#X obj 340 48 stdout;
+#X obj 26 187 dac~ 1;
+#X connect 0 0 5 0;
+#X connect 1 0 2 0;
+#X connect 1 0 4 0;
+#X connect 3 0 0 0;

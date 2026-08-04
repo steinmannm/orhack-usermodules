@@ -1,0 +1,18 @@
+{
+    "name" : "sndsel",
+    "display" : "SndSel",
+    "parameters" : [
+        ["int","s1_tgt","Snd 1",1,14,2],
+        ["int","s2_tgt","Snd 2",1,14,4],
+        ["int","s3_tgt","Snd 3",1,14,8],
+        ["int","s4_tgt","Snd 4",1,14,11],
+        ["int","s1_led","LED 1",0,7,4],
+        ["int","s2_led","LED 2",0,7,6],
+        ["int","s3_led","LED 3",0,7,2],
+        ["int","s4_led","LED 4",0,7,1]
+    ],
+    "pages" : [
+        ["pg_sounds","Sounds",["s1_tgt","s2_tgt","s3_tgt","s4_tgt"]],
+        ["pg_leds","LEDs",["s1_led","s2_led","s3_led","s4_led"]]
+    ]
+}
