@@ -532,10 +532,6 @@
 #X msg 380 515 s3_led \$1;
 #X obj 470 490 r s4_led-\$1;
 #X msg 470 515 s4_led \$1;
-#X obj 900 625 inlet~ inL-\$1;
-#X obj 960 625 inlet~ inR-\$1;
-#X obj 900 645 outlet~ outL-\$1;
-#X obj 960 645 outlet~ outR-\$1;
 #X connect 0 0 2 0;
 #X connect 0 1 2 1;
 #X connect 0 2 2 2;
