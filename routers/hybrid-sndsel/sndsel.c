@@ -120,17 +120,16 @@ static void sndsel_aux(t_sndsel *x, t_floatarg f)
 {
     int val = (int)f;
     if (val == 1) {
-        /* press */
+        /* press: toggle within page immediately */
         x->aux_held = 1;
+        x->current_sound ^= 1;
+        sndsel_update_aux(x);
         clock_delay(x->longpress_clock, (double)x->lp_time);
     } else {
         /* release */
         if (x->aux_held) {
-            /* short press: toggle within page */
             clock_unset(x->longpress_clock);
             x->aux_held = 0;
-            x->current_sound ^= 1;
-            sndsel_update_aux(x);
         }
     }
 }
@@ -166,10 +165,10 @@ static void *sndsel_new(t_symbol *id)
     x->sound_tgt[1] = 4;
     x->sound_tgt[2] = 8;
     x->sound_tgt[3] = 11;
-    x->sound_led[0] = 4;
-    x->sound_led[1] = 6;
-    x->sound_led[2] = 2;
-    x->sound_led[3] = 1;
+    x->sound_led[0] = 2;
+    x->sound_led[1] = 1;
+    x->sound_led[2] = 4;
+    x->sound_led[3] = 3;
     x->current_sound = 0;
     x->current_page = 0;
     x->lp_time = 500;

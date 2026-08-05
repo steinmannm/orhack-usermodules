@@ -1,0 +1,42 @@
+Router module: proven root cause and workaround
+================================================
+
+Problem: dynamically swapping routers via KontrolRack_loadmodule() does
+not produce audio. This affects ALL routers, not just hybrid-sndsel.
+
+Root cause (proven):
+- KontrolRack_loadmodule() (KontrolRack.cpp:460-475) clears the s1
+  subpatch and rebuilds it with r~ inL-s1 / s~ outL-s1 wired to the
+  module's inlet~/outlet~.
+- But mother.pd sends audio via s~ oinL (not s~ inL-s1) and receives
+  via catch~ ooutL (not r~ outL-s1). The loader's wiring is useless
+  for the orhack audio path.
+- The router's internal r~ oinL / throw~ ooutL still work (global
+  names), but the DSP graph after a dynamic swap does not produce
+  sound. Exact mechanism unclear — possibly DSP recompile timing or
+  the clear destroying signal chain state.
+- Preset loading (Rack.cpp:235) only calls loadModule when the preset's
+  moduleType differs from main.pd's KontrolModule type. If they match,
+  no swap happens and audio works.
+
+Workaround (proven, in use):
+- main.pd references hybrid-sndsel via absolute path:
+    /sdcard/media/orhack/user-modules/routers/hybrid-sndsel/module
+  with KontrolModule type "routers/hybrid-sndsel".
+- Preset moduleType must match ("routers/hybrid-sndsel") so no dynamic
+  swap is triggered.
+- Dummy inlet~/outlet~ objects are added to module.pd (unconnected) so
+  the loader doesn't error if a swap ever does happen. Stock Orac
+  routers (parallel, serial) also have these dummy inlet~/outlet~.
+
+Location:
+- hybrid-sndsel lives in user-modules
+  (/sdcard/media/orhack/user-modules/routers/hybrid-sndsel/) so it can
+  be part of the orhack-usermodules git repo.
+- The absolute path in main.pd is the only modification to the orhack
+  patch itself.
+
+TODO
+----
+- Investigate why DSP graph fails after dynamic router swap. If fixed,
+  the absolute path workaround in main.pd would no longer be needed.

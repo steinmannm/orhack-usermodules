@@ -1,0 +1,249 @@
+{
+    "display" : "HybSndSel",
+    "parameters" :  [
+
+        ["int","s1_tgt","Target 1",1,14,2],
+        ["int","s2_tgt","Target 2",1,14,4],
+        ["int","s3_tgt","Target 3",1,14,8],
+        ["int","s4_tgt","Target 4",1,14,11],
+
+        ["int","s1_led","LED 1",0,7,2],
+        ["int","s2_led","LED 2",0,7,1],
+        ["int","s3_led","LED 3",0,7,4],
+        ["int","s4_led","LED 4",0,7,3],
+
+	["bool", "screensaverState","Screensaver",0],
+	["bool", "screensaverGfx","Graphics",0],
+	["int", "screensaverTime","Minutes",1,60,5],
+	["bool", "latencyComp","Auto Latency",1],
+
+
+        ["pct", "r-gain-a1","A1 Gain ||",0,100,100],
+        ["bool","r-notethru-a1","A1 Note >>",0],
+        ["pct","r-sendP1-a1","A1 Send P1",0,100,0],
+        ["pct","r-sendP2-a1","A1 Send P2",0,100,0],
+
+
+        ["pct", "r-gain-a2","A2 Gain ||",0,100,100],
+        ["bool","r-notethru-a2","A2 Note >>",0],
+        ["pct","r-sendP1-a2","A2 Send P1",0,100,0],
+        ["pct","r-sendP2-a2","A2 Send P2",0,100,0],
+
+        
+        ["pct", "r-gain-a3","A3 Gain ||",0,100,100],
+        ["bool","r-notethru-a3","A3 Note >>",0],
+        ["pct","r-sendP1-a3","A3 Send P1",0,100,0],
+        ["pct","r-sendP2-a3","A3 Send P2",0,100,0],
+        
+
+        
+        ["pct", "r-gain-b1","B1 Gain ||",0,100,100],
+        ["bool","r-notethru-b1","B1 Note >>",0],
+        ["pct","r-sendP1-b1","B1 Send P1",0,100,0],
+        ["pct","r-sendP2-b1","B1 Send P2",0,100,0],
+
+        
+        ["pct", "r-gain-b2","B2 Gain ||",0,100,100],
+        ["bool","r-notethru-b2","B2 Note >>",0],
+        ["pct","r-sendP1-b2","B2 Send P1",0,100,0],
+        ["pct","r-sendP2-b2","B2 Send P2",0,100,0],
+
+        
+        ["pct", "r-gain-b3","B3 Gain ||",0,100,100],
+        ["bool","r-notethru-b3","B3 Note >>",0],
+        ["pct","r-sendP1-b3","B3 Send P1",0,100,0],
+        ["pct","r-sendP2-b3","B3 Send P2",0,100,0],
+        
+
+        
+        ["pct", "r-gain-b4","B4 Gain ||",0,100,100],
+        ["bool","r-notethru-b4","B4 Note >>",0],
+        ["pct","r-sendP1-b4","B4 Send P1",0,100,0],
+        ["pct","r-sendP2-b4","B4 Send P2",0,100,0],
+
+        
+        ["pct", "r-gain-c1","C1 Gain ||",0,100,100],
+        ["bool","r-notethru-c1","C1 Note >>",0],
+        ["pct","r-sendP1-c1","C1 Send P1",0,100,0],
+        ["pct","r-sendP2-c1","C1 Send P2",0,100,0],
+
+        
+        ["pct", "r-gain-c2","C2 Gain ||",0,100,100],
+        ["bool","r-notethru-c2","C2 Note >>",0],
+        ["pct","r-sendP1-c2","C2 Send P1",0,100,0],
+        ["pct","r-sendP2-c2","C2 Send P2",0,100,0],
+
+
+        
+        ["pct", "r-gain-c3","C3 Gain ||",0,100,100],
+        ["bool","r-notethru-c3","C3 Note >>",0],
+        ["pct","r-sendP1-c3","C3 Send P1",0,100,0],
+        ["pct","r-sendP2-c3","C3 Send P2",0,100,0],
+
+
+        
+        ["pct", "r-gain-d1","D1 Gain ||",0,100,100],
+        ["bool","r-notethru-d1","D1 Note >>",0],
+        ["pct","r-sendP1-d1","D1 Send P1",0,100,0],
+        ["pct","r-sendP2-d1","D1 Send P2",0,100,0],
+
+        
+        ["pct", "r-gain-d2","D2 Gain ||",0,100,100],
+        ["bool","r-notethru-d2","D2 Note >>",0],
+        ["pct","r-sendP1-d2","D2 Send P1",0,100,0],
+        ["pct","r-sendP2-d2","D2 Send P2",0,100,0],
+
+        
+        ["pct", "r-gain-d3","D3 Gain ||",0,100,100],
+        ["bool","r-notethru-d3","D3 Note >>",0],
+        ["pct","r-sendP1-d3","D3 Send P1",0,100,0],
+        ["pct","r-sendP2-d3","D3 Send P2",0,100,0],
+
+        
+        ["pct", "r-gain-d4","D4 Gain ||",0,100,100],
+        ["bool","r-notethru-d4","D4 Note >>",0],
+        ["pct","r-sendP1-d4","D4 Send P1",0,100,0],
+        ["pct","r-sendP2-d4","D4 Send P2",0,100,0],
+
+
+        
+        ["pct", "r-gain-p1","P1 Gain ||",0,200,100],
+	["freq", "r-hpf-p1","P1 Fltr IN",0,250,0],
+        ["bool","r-bypass-p1","P1 ->-> P2",0],
+        ["pct","r-sendP2-p1","P1 Send P2",0,100,0],
+
+        
+        ["pct", "r-gain-p2","P2 Gain ||",0,200,100],
+	["freq", "r-hpf-p2","P2 Fltr IN",0,250,0],
+        ["bool","r-bypass-p2","P2 Bypass",0],
+
+        
+        ["pct", "r-gain-f1","F1 Gain ||",0,100,100],
+        ["bool","r-bypass-f1","F1 Bypass",0],
+
+        
+        ["pct", "r-gain-f2","F2 Gain ||",0,100,100],
+        ["bool","r-bypass-f2","F2 Bypass",0],
+
+        
+        ["pct", "r-gain-f3","F3 Gain ||",0,100,100],
+	["bool", "r-multitrack-f3","Multi-Track",1],
+        ["bool","r-bypass-f3","F3 Bypass",0],
+
+        ["bool", "r-chin-midigate-1","A MIDI In",1],
+        ["int", "r-chin-midich-1","A MIDI In Ch.",0,16,1],
+        ["int", "r-chout-midich-1","A MIDI Out Ch.",0,16,0],
+
+        ["pct", "r-chin-l-gain-1","A In L Gain",0,200,0],
+        ["pct", "r-chin-r-gain-1","A In R Gain",0,200,0],
+        ["pct", "r-chout-gain-1","A Out Gain",0,100,100],
+
+        ["pan", "r-chin-l-pan-1","A In L Pan",0,1,0],
+        ["pan", "r-chin-r-pan-1","A In R Pan",0,1,1],
+        ["pan", "r-chout-l-pan-1","A Out L Pan",0,1,0],
+        ["pan", "r-chout-r-pan-1","A Out R Pan",0,1,1],
+
+        ["bool", "r-chin-midigate-2","B MIDI In",1],
+        ["int", "r-chin-midich-2","B MIDI In Ch.",0,16,2],
+        ["int", "r-chout-midich-2","B MIDI Out Ch.",0,16,0],
+
+        ["pct", "r-chin-l-gain-2","B In L Gain",0,200,0],
+        ["pct", "r-chin-r-gain-2","B In R Gain",0,200,0],
+        ["pct", "r-chout-gain-2","B Out Gain",0,100,100],
+
+        ["pan", "r-chin-l-pan-2","B In L Pan",0,1,0],
+        ["pan", "r-chin-r-pan-2","B In R Pan",0,1,1],
+        ["pan", "r-chout-l-pan-2","B Out L Pan",0,1,0],
+        ["pan", "r-chout-r-pan-2","B Out R Pan",0,1,1],
+
+        ["bool", "r-chin-midigate-3","C MIDI In",1],
+        ["int", "r-chin-midich-3","C MIDI In Ch.",0,16,3],
+        ["int", "r-chout-midich-3","C MIDI Out Ch.",0,16,0],
+
+        ["pct", "r-chin-l-gain-3","C In L Gain",0,200,0],
+        ["pct", "r-chin-r-gain-3","C In R Gain",0,200,0],
+        ["pct", "r-chout-gain-3","C Out Gain",0,100,100],
+
+        ["pan", "r-chin-l-pan-3","C In L Pan",0,1,0],
+        ["pan", "r-chin-r-pan-3","C In R Pan",0,1,1],
+        ["pan", "r-chout-l-pan-3","C Out L Pan",0,1,0],
+        ["pan", "r-chout-r-pan-3","C Out R Pan",0,1,1],
+
+        ["bool", "r-chin-midigate-4","D MIDI In",1],
+        ["int", "r-chin-midich-4","D MIDI In Ch.",0,16,3],
+        ["int", "r-chout-midich-4","D MIDI Out Ch.",0,16,0],
+
+        ["pct", "r-chin-l-gain-4","D In L Gain",0,200,0],
+        ["pct", "r-chin-r-gain-4","D In R Gain",0,200,0],
+        ["pct", "r-chout-gain-4","D Out Gain",0,100,100],
+
+        ["pan", "r-chin-l-pan-4","D In L Pan",0,1,0],
+        ["pan", "r-chin-r-pan-4","D In R Pan",0,1,1],
+        ["pan", "r-chout-l-pan-4","D Out L Pan",0,1,0],
+        ["pan", "r-chout-r-pan-4","D Out R Pan",0,1,1],
+        
+
+        ["int",  "r-main-dest", "Act. Dest",0,14,0],
+        ["int",  "r-midi-ch",   "Act. MIDI Ch",0,16,16],
+        ["int",  "r-midi-module-cc", "Act. Mod CC",0,120,0],
+
+        ["int", "r-midi-auxcc","Aux CC",0,120,69],
+        ["int", "r-midi-fscc","FS Ped CC",0,120,64],
+        ["int", "r-midi-expcc","Exp Ped CC",0,120,4],
+
+        ["bool", "r-midi-pgmgate","Prog",1],
+        ["int",  "r-midi-ppreset-cc","Preset-",0,120,100],
+        ["int",  "r-midi-npreset-cc","Preset+",0,120,101],
+        ["int",  "r-midi-save-preset-cc","Save Preset",0,120,102],
+ 
+        ["bool", "r-midi-notegate","Act. Note",0],
+        ["bool", "r-midi-ctrlgate","Act. Ctrl",0]
+
+    ],
+    "pages" : [ 
+        ["pg_allgains","Mix", []],
+        ["pg_sounds","Sounds",["s1_tgt","s2_tgt","s3_tgt","s4_tgt"]],
+        ["pg_leds","LEDs",["s1_led","s2_led","s3_led","s4_led"]],
+        ["pg_a1","Module A1", ["r-gain-a1", "r-sendP1-a1", "r-sendP2-a1", "r-notethru-a1"]],
+        ["pg_s1","Module S1", ["screensaverState", "screensaverGfx", "screensaverTime"]],
+        ["pg_a2","Module A2", ["r-gain-a2", "r-sendP1-a2", "r-sendP2-a2", "r-notethru-a2"]],
+        ["pg_s2","Module S2", ["latencyComp"]],
+        ["pg_a3","Module A3", ["r-gain-a3", "r-sendP1-a3", "r-sendP2-a3", "r-notethru-a3"]],
+        ["pg_b1","Module B1", ["r-gain-b1", "r-sendP1-b1", "r-sendP2-b1", "r-notethru-b1"]],
+        ["pg_m1","Module M1", []],
+        ["pg_b2","Module B2", ["r-gain-b2", "r-sendP1-b2", "r-sendP2-b2", "r-notethru-b2"]],
+        ["pg_m2","Module M2", []],
+        ["pg_b3","Module B3", ["r-gain-b3", "r-sendP1-b3", "r-sendP2-b3", "r-notethru-b3"]],
+        ["pg_m3","Module M3", []],
+        ["pg_b4","Module B4", ["r-gain-b4", "r-sendP1-b4", "r-sendP2-b4", "r-notethru-b4"]],
+        ["pg_c1","Module C1", ["r-gain-c1", "r-sendP1-c1", "r-sendP2-c1", "r-notethru-c1"]],
+        ["pg_p1","Module P1", ["r-gain-p1", "r-hpf-p1",  "r-sendP2-p1", "r-bypass-p1"]],
+        ["pg_c2","Module C2", ["r-gain-c2", "r-sendP1-c2", "r-sendP2-c2", "r-notethru-c2"]],
+        ["pg_p2","Module P2", ["r-gain-p2", "r-hpf-p2"]],
+        ["pg_c3","Module C3", ["r-gain-c3", "r-sendP1-c3", "r-sendP2-c3", "r-notethru-c3"]],
+        ["pg_d1","Module D1", ["r-gain-d1", "r-sendP1-d1", "r-sendP2-d1", "r-notethru-d1"]],
+        ["pg_f1","Master F1", ["r-gain-f1"]],
+        ["pg_d2","Module D2", ["r-gain-d2", "r-sendP1-d2", "r-sendP2-d2", "r-notethru-d2"]],
+        ["pg_f2","Master F2", ["r-gain-f2"]],
+        ["pg_d3","Module D3", ["r-gain-d3", "r-sendP1-d3", "r-sendP2-d3", "r-notethru-d3"]],
+        ["pg_f3","Master F3", ["r-gain-f3", "r-multitrack-f3"]],
+        ["pg_d4","Module D4", ["r-gain-d4", "r-sendP1-d4", "r-sendP2-d4", "r-notethru-d4"]],
+        ["pg_ch1pan" , "Chain A Pan" ,["r-chin-l-pan-1", "r-chin-r-pan-1", "r-chout-l-pan-1", "r-chout-r-pan-1"]],
+        ["pg_ch1gain", "Chain A Gain",["r-chin-l-gain-1", "r-chin-r-gain-1", "r-chout-gain-1"]],
+        ["pg_ch2pan" , "Chain B Pan" ,["r-chin-l-pan-2", "r-chin-r-pan-2", "r-chout-l-pan-2", "r-chout-r-pan-2"]],
+         ["pg_ch2gain", "Chain B Gain",["r-chin-l-gain-2", "r-chin-r-gain-2", "r-chout-gain-2"]],
+        ["pg_ch3pan" , "Chain C Pan" ,["r-chin-l-pan-3", "r-chin-r-pan-3", "r-chout-l-pan-3", "r-chout-r-pan-3"]],
+        ["pg_ch3gain", "Chain C Gain",["r-chin-l-gain-3", "r-chin-r-gain-3", "r-chout-gain-3"]],
+        ["pg_ch4pan" , "Chain D Pan" ,["r-chin-l-pan-4", "r-chin-r-pan-4", "r-chout-l-pan-4", "r-chout-r-pan-4"]],
+        ["pg_ch4gain", "Chain D Gain",["r-chin-l-gain-4", "r-chin-r-gain-4", "r-chout-gain-4"]],
+        ["pg_ch1midi", "Chain A MIDI",["r-chin-midigate-1", "r-chin-midich-1", "r-chout-midich-1"]],
+        ["pg_ch2midi", "Chain B MIDI",["r-chin-midigate-2","r-chin-midich-2", "r-chout-midich-2"]],
+        ["pg_ch3midi", "Chain C MIDI",["r-chin-midigate-3","r-chin-midich-3", "r-chout-midich-3"]],   
+        ["pg_ch4midi", "Chain D MIDI",["r-chin-midigate-4","r-chin-midich-4", "r-chout-midich-4"]],         
+        ["pg_ctrl1", "Active",    ["r-main-dest", "r-midi-ch", "r-midi-module-cc"]], 
+        ["pg_ctrl2", "A. Ctrl 1", ["r-midi-auxcc", "r-midi-fscc", "r-midi-expcc"]],
+        ["pg_ctrl3", "A. Ctrl 2", ["r-midi-notegate", "r-midi-ctrlgate"]],
+        ["pg_ctrl4", "A. Presets",["r-midi-pgmgate", "r-midi-ppreset-cc", "r-midi-npreset-cc", "r-midi-save-preset-cc"]]
+    ]
+}
+
