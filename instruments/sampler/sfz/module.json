@@ -1,0 +1,15 @@
+{
+    "name" : "sfz",
+    "display" : "SFZ",
+    "parameters" :  [
+        ["pitch","r_trans","Transpose",-24,24,0],
+        ["pct","r_gain","Gain",0,200,100],
+        ["pct","e_attack","Attack",0,100,0],
+        ["pct","e_sustain","Sustain",0,100,100],
+        ["pct","e_release","Release",0,100,50]
+    ],
+    "pages" : [
+        ["pg_main","Main",["r_trans","r_gain"]],
+        ["pg_env","Envelope",["e_attack","e_sustain","e_release"]]
+    ]
+}
