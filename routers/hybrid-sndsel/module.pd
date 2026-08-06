@@ -532,6 +532,10 @@
 #X msg 380 515 s3_led \$1;
 #X obj 470 490 r s4_led-\$1;
 #X msg 470 515 s4_led \$1;
+#X obj 560 560 r loadbang-\$1;
+#X obj 560 585 del 1000;
+#X msg 560 610 selectmodule 1;
+#X obj 560 635 s rackMsgs;
 #X connect 0 0 2 0;
 #X connect 0 1 2 1;
 #X connect 0 2 2 2;
@@ -780,3 +784,6 @@
 #X connect 103 0 88 0;
 #X connect 104 0 105 0;
 #X connect 105 0 88 0;
+#X connect 106 0 107 0;
+#X connect 107 0 108 0;
+#X connect 108 0 109 0;
