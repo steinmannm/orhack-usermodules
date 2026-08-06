@@ -164,7 +164,7 @@ static void sndsel_loadnames(t_sndsel *x, t_symbol *preset)
 {
     char path[256];
     snprintf(path, sizeof(path),
-        "/sdcard/data/orhack/presets/%s/sounds.txt", preset->s_name);
+        "/sdcard/data/orhack/presets/%s/sndsel.txt", preset->s_name);
 
     FILE *fp = fopen(path, "r");
     memset(x->sound_name, 0, sizeof(x->sound_name));
