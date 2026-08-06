@@ -1,6 +1,7 @@
 #include "m_pd.h"
 #include <string.h>
 #include <stdint.h>
+#include <stdio.h>
 
 static t_class *sndsel_class;
 
@@ -13,6 +14,14 @@ static const char *slot_names[] = {
     "b1","b2","b3","b4",
     "c1","c2","c3",
     "d1","d2","d3","d4"
+};
+
+static const char *slot_display[] = {
+    NULL,
+    "A1","A2","A3",
+    "B1","B2","B3","B4",
+    "C1","C2","C3",
+    "D1","D2","D3","D4"
 };
 
 typedef struct _sndsel {
@@ -29,6 +38,7 @@ typedef struct _sndsel {
     t_symbol *slot_send[NUM_SLOTS + 1];
     t_symbol *aux_led_sym;
     t_symbol *aux_label_sym;
+    char sound_name[NUM_SOUNDS][16];
 } t_sndsel;
 
 /* send a note (pitch, velocity) to a slot */
@@ -57,14 +67,17 @@ static void sndsel_update_aux(t_sndsel *x)
         pd_list(x->aux_led_sym->s_thing, &s_list, 1, &a);
     }
 
-    /* label: "N:slotname" */
+    /* label: "N  Slot  Name" or "N  Slot" */
     if (x->aux_label_sym->s_thing) {
-        char buf[16];
-        const char *sname = (tgt >= 1 && tgt <= NUM_SLOTS) ? slot_names[tgt] : "??";
-        snprintf(buf, sizeof(buf), "%d:%s", snd + 1, sname);
+        char buf[32];
+        const char *slot = (tgt >= 1 && tgt <= NUM_SLOTS) ? slot_display[tgt] : "??";
+        if (x->sound_name[snd][0])
+            snprintf(buf, sizeof(buf), "%d  %s  %s", snd + 1, slot, x->sound_name[snd]);
+        else
+            snprintf(buf, sizeof(buf), "%d  %s", snd + 1, slot);
         t_atom a;
         SETSYMBOL(&a, gensym(buf));
-        pd_typedmess(x->aux_label_sym->s_thing, &s_symbol, 1, &a);
+        pd_list(x->aux_label_sym->s_thing, &s_list, 1, &a);
     }
 }
 
@@ -146,6 +159,38 @@ static void sndsel_s3_led(t_sndsel *x, t_floatarg f) { x->sound_led[2] = (int)f;
 static void sndsel_s4_led(t_sndsel *x, t_floatarg f) { x->sound_led[3] = (int)f; sndsel_update_aux(x); }
 
 
+/* load sound names from preset directory */
+static void sndsel_loadnames(t_sndsel *x, t_symbol *preset)
+{
+    char path[256];
+    snprintf(path, sizeof(path),
+        "/sdcard/data/orhack/presets/%s/sounds.txt", preset->s_name);
+
+    FILE *fp = fopen(path, "r");
+    memset(x->sound_name, 0, sizeof(x->sound_name));
+    if (fp) {
+        for (int i = 0; i < NUM_SOUNDS; i++) {
+            char line[32];
+            if (!fgets(line, sizeof(line), fp)) break;
+            /* strip newline */
+            size_t len = strlen(line);
+            while (len > 0 && (line[len-1] == '\n' || line[len-1] == '\r'))
+                line[--len] = '\0';
+            if (len > 0)
+                snprintf(x->sound_name[i], sizeof(x->sound_name[i]), "%s", line);
+        }
+        fclose(fp);
+    }
+    sndsel_update_aux(x);
+}
+
+/* catch any unknown selector — used for rackLoadPreset preset name */
+static void sndsel_anything(t_sndsel *x, t_symbol *s, int argc, t_atom *argv)
+{
+    (void)argc; (void)argv;
+    sndsel_loadnames(x, s);
+}
+
 /* constructor */
 static void *sndsel_new(t_symbol *id)
 {
@@ -174,6 +219,7 @@ static void *sndsel_new(t_symbol *id)
     x->lp_time = 500;
     x->aux_held = 0;
     memset(x->note_slots, 0, sizeof(x->note_slots));
+    memset(x->sound_name, 0, sizeof(x->sound_name));
 
     /* cache slot send symbols */
     char buf[32];
@@ -191,12 +237,19 @@ static void *sndsel_new(t_symbol *id)
     /* create long press clock */
     x->longpress_clock = clock_new(x, (t_method)sndsel_longpress_tick);
 
+    /* bind to rackLoadPreset to load sound names on preset change */
+    pd_bind((t_pd *)x, gensym("rackLoadPreset"));
+
+    /* show the initial sound name immediately */
+    sndsel_update_aux(x);
+
     return x;
 }
 
 /* destructor */
 static void sndsel_free(t_sndsel *x)
 {
+    pd_unbind((t_pd *)x, gensym("rackLoadPreset"));
     clock_free(x->longpress_clock);
 }
 
@@ -210,6 +263,7 @@ void sndsel_setup(void)
         A_SYMBOL, 0);
 
     class_addlist(sndsel_class, sndsel_list);
+    class_addanything(sndsel_class, sndsel_anything);
 
     class_addmethod(sndsel_class, (t_method)sndsel_aux,     gensym("aux"),     A_FLOAT, 0);
     class_addmethod(sndsel_class, (t_method)sndsel_s1_tgt,  gensym("s1_tgt"),  A_FLOAT, 0);
@@ -220,4 +274,5 @@ void sndsel_setup(void)
     class_addmethod(sndsel_class, (t_method)sndsel_s2_led,  gensym("s2_led"),  A_FLOAT, 0);
     class_addmethod(sndsel_class, (t_method)sndsel_s3_led,  gensym("s3_led"),  A_FLOAT, 0);
     class_addmethod(sndsel_class, (t_method)sndsel_s4_led,  gensym("s4_led"),  A_FLOAT, 0);
+    class_addanything(sndsel_class, sndsel_anything);
 }
