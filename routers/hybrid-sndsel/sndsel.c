@@ -34,6 +34,7 @@ typedef struct _sndsel {
     int lp_time;
     t_clock *longpress_clock;
     int aux_held;
+    int ready;
     uint16_t note_slots[128];
     t_symbol *slot_send[NUM_SLOTS + 1];
     t_symbol *aux_led_sym;
@@ -86,6 +87,7 @@ static void sndsel_list(t_sndsel *x, t_symbol *s, int argc, t_atom *argv)
 {
     (void)s;
     if (argc < 2) return;
+    if (!x->ready) return;
     int pitch = (int)atom_getfloat(&argv[0]);
     int velocity = (int)atom_getfloat(&argv[1]);
     if (pitch < 0 || pitch > 127) return;
@@ -184,10 +186,33 @@ static void sndsel_loadnames(t_sndsel *x, t_symbol *preset)
     sndsel_update_aux(x);
 }
 
+/* flush all notes on all slots */
+static void sndsel_flush_all(t_sndsel *x)
+{
+    for (int slot = 1; slot <= NUM_SLOTS; slot++) {
+        t_symbol *dest = x->slot_send[slot];
+        if (!dest->s_thing) continue;
+        for (int pitch = 0; pitch < 128; pitch++) {
+            t_atom args[2];
+            SETFLOAT(&args[0], (t_float)pitch);
+            SETFLOAT(&args[1], 0);
+            pd_list(dest->s_thing, &s_list, 2, args);
+        }
+    }
+}
+
+/* flush method — clear stuck notes on all slots */
+static void sndsel_flush(t_sndsel *x)
+{
+    x->ready = 1;
+    sndsel_flush_all(x);
+}
+
 /* catch any unknown selector — used for rackLoadPreset preset name */
 static void sndsel_anything(t_sndsel *x, t_symbol *s, int argc, t_atom *argv)
 {
     (void)argc; (void)argv;
+    x->ready = 1;
     sndsel_loadnames(x, s);
 }
 
@@ -218,6 +243,7 @@ static void *sndsel_new(t_symbol *id)
     x->current_page = 0;
     x->lp_time = 500;
     x->aux_held = 0;
+    x->ready = 0;
     memset(x->note_slots, 0, sizeof(x->note_slots));
     memset(x->sound_name, 0, sizeof(x->sound_name));
 
@@ -265,6 +291,7 @@ void sndsel_setup(void)
     class_addlist(sndsel_class, sndsel_list);
     class_addanything(sndsel_class, sndsel_anything);
 
+    class_addmethod(sndsel_class, (t_method)sndsel_flush,   gensym("flush"),   0);
     class_addmethod(sndsel_class, (t_method)sndsel_aux,     gensym("aux"),     A_FLOAT, 0);
     class_addmethod(sndsel_class, (t_method)sndsel_s1_tgt,  gensym("s1_tgt"),  A_FLOAT, 0);
     class_addmethod(sndsel_class, (t_method)sndsel_s2_tgt,  gensym("s2_tgt"),  A_FLOAT, 0);
